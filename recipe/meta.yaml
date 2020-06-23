@@ -1,13 +1,14 @@
 {% set name = "usgscsm" %}
-{% set version = "1.4.1" %}
+{% set version = "a53f9cf" %}
 
 package:
   name: {{ name|lower }}
   version: {{ version }}
 
 source:
-  url: https://github.com/USGS-Astrogeology/{{ name }}/archive/{{ version }}.tar.gz
-  sha256: 057fdd9e51994b54a1836e8cbbab19868814bf5e6ef07e90af81607da759c23e
+  git_url: https://github.com/USGS-Astrogeology/usgscsm.git
+  git_tag: {{ version }}
+  patches:
 
 build:
   number: 0
@@ -25,9 +26,9 @@ requirements:
 
 test:
   commands:
-    - conda inspect linkages -p $PREFIX $PKG_NAME  # [not win]
-    - test -e $PREFIX/lib/libusgscsm${SHLIB_EXT}  # [unix]
-    - if not exist %LIBRARY_BIN%\usgscsm.dll exit 1  # [win]
+#    - conda inspect linkages -p $PREFIX $PKG_NAME  # [not win]
+#    - test -e $PREFIX/lib/libusgscsm${SHLIB_EXT}  # [unix]
+#    - if not exist %LIBRARY_BIN%\usgscsm.dll exit 1  # [win]
 
 about:
   home: http://github.com/USGS-Astrogeology/usgscsm

@@ -6,8 +6,8 @@ package:
   version: {{ version }}
 
 source:
-  url: https://github.com/USGS-Astrogeology/{{ name }}/archive/{{ version }}.tar.gz
-  sha256: c43825ffb7a08da3c436650dff20880c9240cab606a0bd3c9cf0d7f962431ba9
+  git_url: git@github.com:oleg-alexandrov/usgscsm.git
+  git_tag: b6c0a29
 
 build:
   number: 0
@@ -16,7 +16,7 @@ build:
 requirements:
   build:
     - {{ compiler('cxx') }}
-    - cmake >=3.10
+    - cmake >=3.15
   host:
     - csm
     - ale

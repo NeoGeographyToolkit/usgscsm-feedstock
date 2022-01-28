@@ -7,7 +7,7 @@ package:
 
 source:
   git_url: git@github.com:oleg-alexandrov/usgscsm.git
-  git_tag: d30a26a
+  git_tag: dbec507
 
 build:
   number: 0
@@ -17,15 +17,56 @@ requirements:
   build:
     - {{ compiler('cxx') }}
     - cmake >=3.15
+# Thees are temporary. Trying to prevent conda conflicts later.
+    - _libgcc_mutex             0.1            # [linux]
+    - gcc_impl_linux-64         7.5.0          # [linux]
+    - gcc_linux-64              7.5.0          # [linux]
+    - krb5                      1.16.3         # [linux]
+    - libgcc                    7.2.0          # [linux]
+    - libgcc-devel_linux-64     7.5.0          # [linux]
+    - libgcc-ng                 11.1.0         # [linux]
+    - ncurses                   6.2            # [linux]
+    - openssl                   1.0.2u         # [linux]
+    - python                    3.6.7          # [linux]
+    - python-dateutil           2.8.2          # [linux]
+    - python_abi                3.6            # [linux]
+
   host:
-    - csm
-    - ale
-    - nlohmann_json
+    - ale 0.8.5
+    - nlohmann_json 3.10.2
+    - csm 3.0.3.3
     - vc  # [win]
+# Thees are temporary. Trying to prevent conda conflicts later.
+    - _libgcc_mutex             0.1            # [linux]
+    - gcc_impl_linux-64         7.5.0          # [linux]
+    - gcc_linux-64              7.5.0          # [linux]
+    - krb5                      1.16.3         # [linux]
+    - libgcc                    7.2.0          # [linux]
+    - libgcc-devel_linux-64     7.5.0          # [linux]
+    - libgcc-ng                 11.1.0         # [linux]
+    - ncurses                   6.2            # [linux]
+    - openssl                   1.0.2u         # [linux]
+    - python                    3.6.7          # [linux]
+    - python-dateutil           2.8.2          # [linux]
+    - python_abi                3.6            # [linux]
+
   run:
-    - ale
-    - nlohmann_json
-    - csm
+    - ale 0.8.5
+    - nlohmann_json 3.10.2
+    - csm 3.0.3.3
+# Thees are temporary. Trying to prevent conda conflicts later.
+    - _libgcc_mutex             0.1            # [linux]
+    - gcc_impl_linux-64         7.5.0          # [linux]
+    - gcc_linux-64              7.5.0          # [linux]
+    - krb5                      1.16.3         # [linux]
+    - libgcc                    7.2.0          # [linux]
+    - libgcc-devel_linux-64     7.5.0          # [linux]
+    - libgcc-ng                 11.1.0         # [linux]
+    - ncurses                   6.2            # [linux]
+    - openssl                   1.0.2u         # [linux]
+    - python                    3.6.7          # [linux]
+    - python-dateutil           2.8.2          # [linux]
+    - python_abi                3.6            # [linux]
 
 test:
   commands:

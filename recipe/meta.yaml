@@ -7,7 +7,7 @@ package:
 
 source:
   git_url: git@github.com:oleg-alexandrov/usgscsm.git
-  git_tag: b6c0a29
+  git_tag: d30a26a
 
 build:
   number: 0

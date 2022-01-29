@@ -32,11 +32,13 @@ requirements:
     - python_abi                3.6            # [linux]
 
   host:
-    - ale 0.8.5
-    - nlohmann_json 3.10.2
-    - csm 3.0.3.3
-    - vc  # [win]
+    - csm                                      # [osx]
+    - ale                                      # [osx]
+    - nlohmann_json                            # [osx]
 # Thees are temporary. Trying to prevent conda conflicts later.
+    - csm 3.0.3.3                              # [linux]
+    - ale 0.8.5                                # [linux]
+    - nlohmann_json 3.10.2                     # [linux]
     - _libgcc_mutex             0.1            # [linux]
     - gcc_impl_linux-64         7.5.0          # [linux]
     - gcc_linux-64              7.5.0          # [linux]
@@ -50,11 +52,16 @@ requirements:
     - python-dateutil           2.8.2          # [linux]
     - python_abi                3.6            # [linux]
 
+
+    - vc  # [win]
   run:
-    - ale 0.8.5
-    - nlohmann_json 3.10.2
-    - csm 3.0.3.3
+    - csm                                      # [osx]
+    - ale                                      # [osx]
+    - nlohmann_json                            # [osx]
 # Thees are temporary. Trying to prevent conda conflicts later.
+    - csm 3.0.3.3                              # [linux]
+    - ale 0.8.5                                # [linux]
+    - nlohmann_json 3.10.2                     # [linux]
     - _libgcc_mutex             0.1            # [linux]
     - gcc_impl_linux-64         7.5.0          # [linux]
     - gcc_linux-64              7.5.0          # [linux]

@@ -1,5 +1,5 @@
 {% set name = "usgscsm" %}
-{% set version = "1.5.2_bugfix" %}
+{% set version = "1.6.0_asp3.1.0" %}
 
 package:
   name: {{ name|lower }}
@@ -7,7 +7,7 @@ package:
 
 source:
   git_url: git@github.com:oleg-alexandrov/usgscsm.git
-  git_tag: bf6058f
+  git_tag: a7cb808
 
 build:
   number: 0
@@ -15,24 +15,18 @@ build:
 
 requirements:
   build:
-# Use the local compiler for OSX. ASP is not compiled well with the conda compiler.
-    - {{ compiler('c') }}                      # [linux]
-    - {{ compiler('cxx') }}                    # [linux]
+    - {{ compiler('cxx') }}
     - cmake
 
   host:
     - ale 0.8.5.*
     - csm 3.0.3.3.*
-    - nlohmann_json 3.10.2.*
-# The package below is to help with conflicts
-    - libpointmatcher isis5.0.1_bugfix
+    - nlohmann_json 3.10.5
 
   run:
-#    - ale 0.8.5.*
-#    - csm 3.0.3.3.*
-#    - nlohmann_json 3.10.2.*
-# The package below is to help with conflicts
-#    - libpointmatcher isis5.0.1_bugfix
+    - ale 0.8.5.*
+    - csm 3.0.3.3.*
+    - nlohmann_json 3.10.5
 
 test:
   commands:

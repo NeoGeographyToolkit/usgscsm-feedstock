@@ -1,11 +1,10 @@
 #!/bin/sh
 mkdir build && cd build
-cmake -D CMAKE_BUILD_TYPE=Release\
-  -D CMAKE_INSTALL_PREFIX=$PREFIX\
-  -D CMAKE_PREFIX_PATH=$PREFIX \
-  -D USGSCSM_BUILD_TESTS=OFF\
-  -D CMAKE_OSX_DEPLOYMENT_TARGET=10.11\
-  -D CMAKE_INSTALL_LIBDIR=lib\
-  -D USGSCSM_EXTERNAL_DEPS=ON\
-  $SRC_DIR
-make -j $CPU_COUNT install
+cmake -DCMAKE_BUILD_TYPE=Release   \
+    -DCMAKE_INSTALL_PREFIX=$PREFIX \
+    -DUSGSCSM_EXTERNAL_DEPS=ON     \
+    -DCMAKE_PREFIX_PATH=$PREFIX    \
+    -DBUILD_TESTS=OFF              \
+    ..
+make install
+

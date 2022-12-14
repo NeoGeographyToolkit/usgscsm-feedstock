@@ -1,5 +1,5 @@
 {% set name = "usgscsm" %}
-{% set version = "1.6.0_asp3.1.0" %}
+{% set version = "1.6.0_asp3.2.0" %}
 
 package:
   name: {{ name|lower }}
@@ -7,7 +7,7 @@ package:
 
 source:
   git_url: git@github.com:oleg-alexandrov/usgscsm.git
-  git_tag: a7cb808
+  git_tag: 214170e
 
 build:
   number: 0
@@ -16,22 +16,23 @@ build:
 requirements:
   build:
     - {{ compiler('cxx') }}
-    - cmake
+    - cmake>=3.15
 
   host:
-    - ale 0.8.5.*
+    - ale>=0.8.8
     - csm 3.0.3.3.*
-    - nlohmann_json 3.10.5
+    - nlohmann_json >=3.11,<3.12.0a0
+    - eigen 3.4.0
 
   run:
-    - ale 0.8.5.*
+    - ale>=0.8.8
     - csm 3.0.3.3.*
-    - nlohmann_json 3.10.5
+    - nlohmann_json >=3.11,<3.12.0a0
 
 test:
   commands:
-    - test -e $PREFIX/lib/libusgscsm${SHLIB_EXT}  # [unix]
-    - if not exist %LIBRARY_BIN%\usgscsm.dll exit 1  # [win]
+#    - test -e $PREFIX/lib/libusgscsm${SHLIB_EXT}  # [unix]
+#    - if not exist %LIBRARY_BIN%\usgscsm.dll exit 1  # [win]
 
 about:
   home: http://github.com/USGS-Astrogeology/usgscsm

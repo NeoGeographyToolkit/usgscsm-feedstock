@@ -31,7 +31,7 @@ source:
   #  sha256: 5bb137beba7c28d46898d358fc74ef57d18a80f56066a51ee467d3b48e9d69fa
 
 build:
-  number: 5
+  number: 6
   skip: true  # [win]
 
 requirements:
@@ -45,6 +45,8 @@ requirements:
   host:
     - vc  # [win]
     - sqlite 3.49.1 # [linux]
+    - libgomp 14.2.0
+    - libgcc 14.2.0 # [linux]
 
 test:
   commands:

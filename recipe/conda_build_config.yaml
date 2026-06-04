@@ -1,0 +1,5 @@
+# Pin to isis_dev's known-good clang 18 (usgscsm is C++; no python build).
+c_compiler_version:
+  - "18"
+cxx_compiler_version:
+  - "18"

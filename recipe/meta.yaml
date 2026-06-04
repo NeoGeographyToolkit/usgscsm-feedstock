@@ -5,60 +5,60 @@ package:
   name: {{ name|lower }}
   version: {{ version }}
 
+# ASP build: EXTERNAL_DEPS=ON. Source = DOI-USGS/usgscsm main @ 74fa08f (12
+# commits past the 2.0.2 tag), which has our merged work: #506 (J2000), #505
+# (KPLO ShadowCam distortion), #501 (binary model state). Uses conda
+# csm/eigen/nlohmann_json/proj (matching isis_dev), NOT the upstream recipe's
+# vendored internal deps. build.sh also patches out the vendored-spdlog install
+# so it does not clobber the env's conda spdlog.
 source:
-  - folder: .
-    url: https://github.com/DOI-USGS/{{ name }}/archive/{{ version }}.tar.gz
-    sha256: 076cb97e59cd3fff86447d91572397d9cca04290e3a36d44844b0978306451e3
-
-  # submodules
-  - folder: ale
-    url: https://github.com/DOI-USGS/ale/archive/0.10.0.zip
-    sha256: 2373e0e1ff3715adef60e61db22e6cea1d5b7941f5b1999dd202065d3d84efb2
-  - folder: csm
-    url: https://github.com/USGS-Astrogeology/csm/archive/c78dbba3731432249a75db9fdd7415b292d46715.zip
-    sha256: e3eb35fbc27df94d6432c66a93b1dd140a9e93d6897c9107d5a99ab0557e99ea
-  - folder: gtest
-    url: https://github.com/google/googletest/archive/aee0f9d9b5b87796ee8a0ab26b7587ec30e8858e.zip
-    sha256: 04a1751f94244307cebe695a69cc945f9387a80b0ef1af21394a490697c5c895
-  - folder: json
-    url: https://github.com/nlohmann/json/archive/refs/tags/v3.8.0.zip
-    sha256: 83947cb78d50990b4b931b8dbc8632781bc601baa45b75ece0899c7b98d86c0b
-  - folder: ale/eigen
-    url: https://gitlab.com/libeigen/eigen/-/archive/3.4.0/eigen-3.4.0.zip
-    sha256: eba3f3d414d2f8cba2919c78ec6daab08fc71ba2ba4ae502b7e5d4d99fc02cda
-  - folder: PROJ
-    url: https://github.com/OSGeo/PROJ/archive/9.3.1.zip
-    sha256: 5bb137beba7c28d46898d358fc74ef57d18a80f56066a51ee467d3b48e9d69fa
+  git_url: https://github.com/DOI-USGS/usgscsm.git
+  git_rev: 74fa08fdd8bba84e777f0efe29d3e66d59f02b3e
 
 build:
-  number: 4
+  number: 1          # asp_0 was published but had a wrong proj run-export pin
+  string: asp_1      # bumped (append-only): asp_0 stays on channel, asp_1 is the fix
   skip: true  # [win]
 
 requirements:
   build:
     - {{ compiler('cxx') }}
-    - {{ stdlib("c") }}
+    # ASP: {{ stdlib("c") }} removed (expands to bogus c_osx-arm64 in our local
+    # conda-build; the cxx compiler activation brings the macOS sysroot).
     - cmake >=3.10,<4.0.0
     - make
   host:
-    - vc  # [win]
-    - sqlite 3.46.1  # [linux]
-
+    # EXTERNAL deps - conda packages matching isis_dev (find_package'd by the
+    # USGSCSM_EXTERNAL_DEPS=ON path). spdlog is NOT here: usgscsm always uses
+    # its vendored spdlog at build time; we only suppress INSTALLING it.
+    # ale: usgscsm DOES depend on ALE's C++ headers - Utilities.cpp uses
+    # ale::DistortionType::KPLOSHADOWCAM (added by ALE #709). Must be OUR ale
+    # (1.2.0=asp_0 has the enum; pin to our channel - listed first). This is
+    # the "pin usgscsm to our ale" Oleg called for.
+    - ale 1.2.0
+    - csm >=3.0.3,<3.0.4
+    - eigen >=3,<4
+    - nlohmann_json =3.11.2
+    - proj >=9.7,<9.8   # match isis_dev 9.7.1 (unpinned pulled 9.8 -> run_export conflict)
+    - sqlite  # [linux]
   run:
-    - vc  # [win]
-    - sqlite 3.46.1  # [linux]
+    - ale 1.2.0
+    - csm >=3.0.3,<3.0.4
+    - proj >=9.7,<9.8
+    # ensure the env has conda spdlog for usgscsm's installed headers, since we
+    # no longer install the vendored copy.
+    - spdlog
+    - sqlite  # [linux]
 
 test:
   commands:
     - test -e $PREFIX/lib/csmplugins/libusgscsm${SHLIB_EXT}  # [unix]
-    - if not exist %LIBRARY_BIN%\usgscsm.dll exit 1  # [win]
 
 about:
   home: http://github.com/DOI-USGS/usgscsm
   license: CC0-1.0
   license_file: LICENSE.md
   summary: USGS Astrogeology developed Community Sensor Model implementations
-
   description: |
     The USGS Astrogeology CSM compliant sensor models for surface planetary
     science applications.

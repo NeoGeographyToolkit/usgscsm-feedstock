@@ -38,19 +38,17 @@ requirements:
     # ale::DistortionType::KPLOSHADOWCAM (added by ALE #709). Must be OUR ale
     # (1.2.0=asp_0 has the enum; pin to our channel - listed first). This is
     # the "pin usgscsm to our ale" Oleg called for.
-    - ale 1.2.0
+    - ale =1.2.0=asp*
     - csm >=3.0.3,<3.0.4
     - eigen >=3,<4
     - nlohmann_json =3.11.2
     - proj >=9.7,<9.8   # match isis_dev 9.7.1 (unpinned pulled 9.8 -> run_export conflict)
     - sqlite  # [linux]
   run:
-    - ale 1.2.0
+    - ale =1.2.0=asp*
     - csm >=3.0.3,<3.0.4
     - proj >=9.7,<9.8
-    # ensure the env has conda spdlog for usgscsm's installed headers, since we
-    # no longer install the vendored copy.
-    - spdlog
+    # no_spdlog fork: spdlog fully removed, no run dep needed
     - sqlite  # [linux]
 
 test:

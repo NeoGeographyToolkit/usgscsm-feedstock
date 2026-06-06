@@ -12,12 +12,15 @@ package:
 # vendored internal deps. build.sh also patches out the vendored-spdlog install
 # so it does not clobber the env's conda spdlog.
 source:
-  git_url: https://github.com/DOI-USGS/usgscsm.git
-  git_rev: 74fa08fdd8bba84e777f0efe29d3e66d59f02b3e
+  # ASP: OUR fork branch no_spdlog (spdlog fully removed, same as SpiceQL).
+  # Upstream DOI-USGS/usgscsm still uses spdlog, causing ABI mismatch crashes
+  # when libusgscsm.so and libAspCamera.so have different spdlog destructors.
+  git_url: https://github.com/oleg-alexandrov/usgscsm.git
+  git_rev: 572b9f08f04a74296b2ea60da09c44dc31eabdfc
 
 build:
-  number: 1          # asp_0 was published but had a wrong proj run-export pin
-  string: asp_1      # bumped (append-only): asp_0 stays on channel, asp_1 is the fix
+  number: 3          # asp_3: switch to no_spdlog fork (fixes exit-time SIGSEGV)
+  string: asp_3
   skip: true  # [win]
 
 requirements:

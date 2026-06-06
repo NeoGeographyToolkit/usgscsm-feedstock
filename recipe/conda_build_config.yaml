@@ -1,7 +1,7 @@
-# Pin to isis_dev's known-good clang 18 (usgscsm is C++; no python build).
+# Pin compiler. Mac: clang 18. Linux: gcc 14 (match ASP build).
 c_compiler_version:
   - "18"   # [osx]
-  - "13"   # [linux]
+  - "14"   # [linux]
 cxx_compiler_version:
   - "18"   # [osx]
-  - "13"   # [linux]
+  - "14"   # [linux]

@@ -1,11 +1,7 @@
 #!/bin/sh
 set -e
 
-# ASP: do NOT install usgscsm's vendored spdlog (1.3.1) - it would clobber the
-# env's conda spdlog 1.16.0 headers (header/lib mismatch -> ABI hazard). Drop
-# the include/spdlog entry from USGSCSM_INSTALL_INCLUDE_DIRS; the line becomes
-# just the closing paren so the set() stays valid. Consumers use conda spdlog.
-sed -i.bak 's@.*include/spdlog")@                                 )@' "$SRC_DIR/CMakeLists.txt"
+# Our no_spdlog fork has spdlog fully removed - no sed hack needed.
 
 mkdir build && cd build
 cmake ${CMAKE_ARGS} \

@@ -16,11 +16,11 @@ source:
   # Upstream DOI-USGS/usgscsm still uses spdlog, causing ABI mismatch crashes
   # when libusgscsm.so and libAspCamera.so have different spdlog destructors.
   git_url: https://github.com/oleg-alexandrov/usgscsm.git
-  git_rev: 572b9f08f04a74296b2ea60da09c44dc31eabdfc
+  git_rev: 03d91844be580bb1c50d5d7c94b04673219d0bc9
 
 build:
-  number: 4          # asp_4: no_spdlog fork + =asp* pins + gcc 14
-  string: asp_4
+  number: 5          # asp_4: no_spdlog fork + =asp* pins + gcc 14
+  string: asp_5
   skip: true  # [win]
 
 requirements:

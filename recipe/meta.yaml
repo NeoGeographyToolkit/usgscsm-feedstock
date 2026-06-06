@@ -19,8 +19,8 @@ source:
   git_rev: 572b9f08f04a74296b2ea60da09c44dc31eabdfc
 
 build:
-  number: 3          # asp_3: switch to no_spdlog fork (fixes exit-time SIGSEGV)
-  string: asp_3
+  number: 4          # asp_4: no_spdlog fork + =asp* pins + gcc 14
+  string: asp_4
   skip: true  # [win]
 
 requirements:

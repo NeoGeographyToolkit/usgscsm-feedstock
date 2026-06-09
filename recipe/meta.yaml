@@ -19,15 +19,14 @@ source:
   git_rev: 03d91844be580bb1c50d5d7c94b04673219d0bc9
 
 build:
-  number: 5          # asp_4: no_spdlog fork + =asp* pins + gcc 14
-  string: asp_5
+  number: 6          # glibc floor fix (re-add stdlib pin)
+  string: asp_6
   skip: true  # [win]
 
 requirements:
   build:
     - {{ compiler('cxx') }}
-    # ASP: {{ stdlib("c") }} removed (expands to bogus c_osx-arm64 in our local
-    # conda-build; the cxx compiler activation brings the macOS sysroot).
+    - {{ stdlib('c') }}
     - cmake >=3.10,<4.0.0
     - make
   host:

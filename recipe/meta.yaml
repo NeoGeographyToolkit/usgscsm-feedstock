@@ -19,8 +19,8 @@ source:
   git_rev: 03d91844be580bb1c50d5d7c94b04673219d0bc9
 
 build:
-  number: 6          # glibc floor fix (re-add stdlib pin)
-  string: asp_6
+  number: 7          # glibc floor fix (re-add stdlib pin)
+  string: asp_7_{{ target_platform | replace("-", "_") }}
   skip: true  # [win]
 
 requirements:
